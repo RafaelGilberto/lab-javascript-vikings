@@ -59,19 +59,15 @@ class War {
     this.saxonArmy.push(Saxon);
   }
   vikingAttack() {
-    let currentSaxon = 1 + Math.floor(Math.random() * this.saxonArmy.length);
-    let currentViking = 1 + Math.floor(Math.random() * this.vikingArmy.length);
-    let saxonArmyCopy = [...this.saxonArmy];
-    if (
-      this.saxonArmy[currentSaxon].health -
-        this.vikingArmy[currentViking].strength <=
-      0
-    ) {
-      this.saxonArmy.splice(currentSaxon, 1);
-    }
-    return this.saxonArmyCopy[currentSaxon].receiveDamage(
+    this.currentSaxon = 1 + Math.floor(Math.random() * this.saxonArmy.length);
+    this.currentViking = 1 + Math.floor(Math.random() * this.vikingArmy.length);
+    this.result = this.saxonArmy[currentSaxon].receiveDamage(
       this.vikingArmy[currentViking].strength
     );
+    if (this.result == "A Saxon has died in combat") {
+      this.saxonArmy.splice(currentSaxon, 1);
+    }
+    return this.result;
   }
   saxonAttack() {}
   showStatus() {
